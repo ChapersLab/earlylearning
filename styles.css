@@ -1,0 +1,49 @@
+/* RESET BÁSICO */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* VARIABLES */
+:root {
+  --primary: #2563eb;
+  --secondary: #22c55e;
+  --text: #1f2937;
+  --bg: #ffffff;
+}
+
+/* BASE */
+body {
+  font-family: 'Poppins', sans-serif;
+  color: var(--text);
+  background-color: var(--bg);
+  line-height: 1.6;
+}
+
+/* CONTENEDOR */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* BOTONES */
+button {
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h1 {
+    color: #2563eb;
+}
+
+h3 {
+    color: #22c55e;
+}
