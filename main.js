@@ -1,5 +1,8 @@
 const toggle = document.querySelector('.nav-toggle');
 const menu = document.querySelector('.nav-menu');
+const links = document.querySelectorAll('.nav-menu a');
+
+let lastFocusedElement = null;
 
 toggle.addEventListener('click', () => {
   const isOpen = toggle.classList.toggle('active');
@@ -7,4 +10,40 @@ toggle.addEventListener('click', () => {
 
   // Accesibilidad
   toggle.setAttribute('aria-expanded', isOpen);
+
+  // Bloquear scroll
+  document.body.classList.toggle('no-scroll', isOpen);
+
+  if (isOpen) {
+    lastFocusedElement = document.activeElement;
+    links[0].focus();
+  } else {
+    toggle.focus();
+  }
 });
+
+/* CERRAR AL HACER CLICK EN LINK */
+links.forEach(link => {
+  link.addEventListener('click', () => {
+    closeMenu();
+  });
+});
+
+/* CERRAR CON ESC */
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && menu.classList.contains('active')) {
+    closeMenu();
+  }
+});
+
+/* FUNCION CENTRAL */
+function closeMenu() {
+  toggle.classList.remove('active');
+  menu.classList.remove('active');
+  toggle.setAttribute('aria-expanded', false);
+  document.body.classList.remove('no-scroll');
+
+  if (lastFocusedElement) {
+    lastFocusedElement.focus();
+  }
+}

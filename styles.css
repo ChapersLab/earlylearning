@@ -7,7 +7,7 @@
 
 /* VARIABLES */
 :root {
-  --primary: #2563EB;
+  --primary: #5f1dd1;
   --secondary: #22C55E;
   --text: #1F2937;
   --bg: #F9FAFB;
@@ -155,17 +155,53 @@ a {
 }
 
 /* MENU MOBILE (DESPLEGABLE) */
+.nav-menu {
+  display: none;
+  gap: 24px;
+}
+
+/* OVERLAY MOBILE */
 .nav-menu.active {
   display: flex;
   flex-direction: column;
-  position: absolute;
-  top: 70px;
+  justify-content: center;
+  align-items: center;
+
+  position: fixed;
+  top: 70px; /* respeta altura del navbar */
   left: 0;
-  width: 100%;
-  background-color: var(--bg);
-  padding: 20px;
-  gap: 16px;
-  border-bottom: 1px solid #e5e7eb;
+  right: 0;
+  bottom: 0;
+
+  background-color: rgba(249, 250, 251, 0.98);
+  backdrop-filter: blur(6px);
+
+  gap: 24px;
+
+  opacity: 0;
+transform: translateY(-20px);
+animation: menuSlide 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+
+  z-index: 999;
+}
+
+/* ANIMACIÓN */
+@keyframes menuSlide {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+    backdrop-filter: blur(0px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    backdrop-filter: blur(6px);
+  }
+}
+
+/* BLOQUEAR SCROLL */
+.no-scroll {
+  overflow: hidden;
 }
 
 /* DESKTOP */
@@ -189,3 +225,148 @@ a {
 
 }
 
+/* HERO BASE */
+.hero {
+  position: relative;
+  background-color: white;
+  padding: 80px 0;
+
+  /* MOBILE + TABLET: background */
+  background-image: url("img/banner-right.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+/* CONTENEDOR */
+.hero-container {
+  display: flex;
+  justify-content: center;
+}
+
+/* CARD */
+.hero-content {
+  background: white;
+  border-radius: 16px;
+  padding: 28px 20px;
+  max-width: 500px;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+}
+
+/* MOBILE TYPO FIX */
+.hero-content h1 {
+  font-size: 28px;
+  margin-bottom: 14px;
+}
+
+.hero-content p {
+  font-size: 14px;
+  margin-bottom: 18px;
+  color: #4b5563;
+}
+
+.highlight {
+  color: var(--primary);
+}
+
+/* BOTONES */
+.hero-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.btn {
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  width: fit-content;
+}
+
+.btn-primary {
+  background-color: var(--secondary);
+  color: white;
+}
+
+.btn-secondary {
+  background-color: white;
+  border: 1px solid #d1d5db;
+  color: var(--primary);
+}
+
+/* IMAGEN OCULTA MOBILE/TABLET */
+.hero-image {
+  display: none;
+}
+
+/* TABLET (NO TOCAR DISEÑO, SOLO AJUSTES SUAVES) */
+@media (min-width: 768px) {
+
+  .hero {
+    padding: 100px 0;
+    background-position: right center;
+  }
+
+  .hero-content {
+    padding: 36px;
+  }
+
+  .hero-buttons {
+    flex-direction: row;
+  }
+
+}
+
+/* DESKTOP */
+@media (min-width: 1024px) {
+
+  .hero {
+    background-image: none; /* quitamos fondo */
+    padding: 120px 0;
+  }
+
+  .hero-container {
+    justify-content: flex-start;
+  }
+
+  /* TEXTO */
+  .hero-content {
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+    text-align: left;
+    max-width: 550px;
+  }
+
+  .hero-content h1 {
+    font-size: 48px;
+  }
+
+  .hero-content p {
+    font-size: 16px;
+  }
+
+  .hero-buttons {
+    justify-content: flex-start;
+  }
+
+  /* IMAGEN EDGE-TO-RIGHT (CLAVE) */
+  .hero-image {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    width: 50%;
+    max-width: 700px;
+  }
+
+  .hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+}
