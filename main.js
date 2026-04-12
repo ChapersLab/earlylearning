@@ -57,3 +57,28 @@ window.addEventListener('scroll', () => {
     navbar.classList.remove('scrolled');
   }
 });
+
+
+
+
+
+const steps = document.querySelectorAll('.step');
+const stepsContainer = document.querySelector('.steps');
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+
+      stepsContainer.classList.add('show-line');
+
+      steps.forEach((step, index) => {
+        setTimeout(() => {
+          step.classList.add('show');
+        }, index * 180);
+      });
+
+    }
+  });
+}, { threshold: 0.3 });
+
+observer.observe(stepsContainer);

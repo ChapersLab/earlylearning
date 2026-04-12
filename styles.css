@@ -588,3 +588,192 @@ animation: menuSlide 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+
+
+
+/* HOW IT WORKS */
+.how-it-works {
+  padding: 80px 0;
+  color: white;
+
+  background: linear-gradient(
+    135deg,
+    var(--primary) 0%,
+    #6d28d9 50%,
+    #4c1d95 100%
+  );
+}
+
+/* TITLES */
+.section-title.light {
+  color: white;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.section-subtitle {
+  text-align: center;
+  margin-bottom: 10px;
+  color: rgba(255,255,255,0.85);
+  font-size: 14px;
+}
+
+/* SOCIAL PROOF */
+.social-proof {
+  text-align: center;
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 30px;
+}
+
+/* STEPS */
+.steps {
+  display: grid;
+  gap: 40px;
+  margin-top: 40px;
+  position: relative;
+}
+
+/* STEP */
+.step {
+  text-align: center;
+  max-width: 280px;
+  margin: 0 auto;
+
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease;
+}
+
+/* SHOW ANIMATION */
+.step.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ICON WRAPPER (glass effect) */
+.step-icon-wrapper {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 18px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(8px);
+
+  border: 1px solid rgba(255,255,255,0.15);
+
+  position: relative;
+}
+
+/* NUMBER */
+.step-number {
+  width: 50px;
+  height: 50px;
+
+  border-radius: 50%;
+  background: white;
+  color: var(--primary);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 20px;
+  font-weight: 700;
+
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* GLOW EFFECT */
+.step-icon-wrapper::after {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+
+  background: radial-gradient(
+    rgba(255,255,255,0.15),
+    transparent 70%
+  );
+
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+/* HOVER */
+.step:hover .step-icon-wrapper::after {
+  opacity: 1;
+}
+
+/* TEXT */
+.step h3 {
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.step p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.85);
+}
+
+/* CTA */
+.how-cta {
+  margin-top: 50px;
+  text-align: center;
+}
+
+/* TABLET & DESKTOP */
+@media (min-width: 768px) {
+  .steps {
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+  }
+
+  /* LINE ANIMATED */
+  .steps::before {
+    content: "";
+    position: absolute;
+    top: 35px;
+    left: 10%;
+    right: 10%;
+    height: 2px;
+
+    background: linear-gradient(
+      to right,
+      rgba(255,255,255,0.2),
+      white,
+      rgba(255,255,255,0.2)
+    );
+
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.8s ease;
+  }
+
+  .steps.show-line::before {
+    transform: scaleX(1);
+  }
+
+  .step {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+/* PULSE ANIMATION */
+@keyframes stepPulse {
+  0% { transform: scale(0.9); opacity: 0; }
+  60% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+.step.show .step-icon-wrapper {
+  animation: stepPulse 0.5s ease forwards;
+}
