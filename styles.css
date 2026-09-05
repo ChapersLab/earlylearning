@@ -1,0 +1,1562 @@
+/* RESET BÁSICO */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* VARIABLES */
+:root {
+  --primary: #5f1dd1;
+  --secondary: #22C55E;
+  --text: #1F2937;
+  --bg: #F9FAFB;
+
+  /* Extended tokens for the sections below the Hero — derived from the
+     existing palette, not a new system. Nothing above overwrites the four
+     original variables. */
+  --purple-50: #F5F0FC;
+  --purple-100: #EBE1FA;
+  --purple-700: #4c17a8;
+  --green-50: #E9FBF1;
+  --ink-muted: #6B7280;
+  --line: #E5E7EB;
+  --paper-tint: #F6F3FC;
+
+  /* Shared section vertical rhythm. Applied consistently across every
+     major section below the Hero (which keeps its own locked padding)
+     so transitions between sections read as intentional rather than
+     accidental — the actual bug was that every section shared the same
+     flat 70-80px at ALL widths, so there was no breakpoint scaling and
+     the desktop gap in particular read as too tight relative to the
+     content density above/below it. */
+  --section-space: 56px;   /* mobile: 48-64px target */
+}
+@media (min-width: 768px) {
+  :root { --section-space: 76px; } /* tablet: 64-88px target */
+}
+@media (min-width: 1024px) {
+  :root { --section-space: 100px; } /* desktop: 80-110px target */
+}
+
+/* BASE */
+body {
+  font-family: 'Poppins', sans-serif;
+  color: var(--text);
+  background-color: var(--bg);
+  line-height: 1.6;
+}
+
+/* TIPOGRAFÍA (TYPE SCALE SYSTEM) */
+p {
+  font-size: 16px;
+  line-height: 150%;
+}
+
+h6 {
+  font-size: 20px;
+  letter-spacing: -0.005em;
+}
+
+h5 {
+  font-size: 25px;
+}
+
+h4 {
+  font-size: 31px;
+  line-height: 130%;
+}
+
+h3 {
+  font-size: 39px;
+  letter-spacing: -0.015em;
+}
+
+h2 {
+  font-size: 49px;
+  line-height: 110%;
+}
+
+h1 {
+  font-size: 61px;
+  letter-spacing: -0.02em;
+  line-height: 100%;
+}
+
+/* CONTENEDOR */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* BOTONES */
+button {
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* BASE */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 12px 20px;
+  border-radius: 8px;
+
+  font-weight: 600;
+  font-size: 14px;
+
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+/* PRIMARY */
+.btn-primary {
+  background-color: var(--secondary);
+  color: white;
+  box-shadow: 0 8px 20px rgba(34, 197, 94, 0.25);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(34, 197, 94, 0.35);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 15px rgba(34, 197, 94, 0.2);
+}
+
+/* SECONDARY (ahora sólido con color primario) */
+.btn-secondary {
+  background-color: var(--primary);
+  color: white;
+  box-shadow: 0 8px 20px rgba(95, 29, 209, 0.25);
+}
+
+.btn-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(95, 29, 209, 0.35);
+}
+
+.btn-secondary:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 15px rgba(95, 29, 209, 0.2);
+}
+
+/* FOCUS ACCESIBLE */
+.btn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* MOBILE FULL WIDTH */
+.hero-buttons .btn {
+  width: 100%;
+}
+
+/* ICONO EN BOTÓN */
+.btn-icon {
+  margin-left: 8px;
+  display: inline-block;
+  transition: transform 0.25s ease;
+}
+
+.btn-primary:hover .btn-icon {
+  transform: translateX(4px);
+}
+
+/* NAVBAR BASE */
+.navbar {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: var(--bg);
+  border-bottom: 1px solid #e5e7eb;
+  z-index: 1000;
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.navbar.scrolled {
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* CONTENEDOR FLEX */
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+  position: relative;
+}
+
+/* LOGO */
+.logo a {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.logo img {
+  height: 45px;
+  width: auto;
+  display: block;
+}
+
+/* MENU DESKTOP */
+.nav-menu {
+  display: none; /* default mobile */
+  gap: 24px;
+}
+
+/* LINKS */
+.nav-menu a {
+  font-size: 16px;
+  transition: opacity 0.2s ease;
+  opacity: 0;
+}
+
+.nav-menu a:hover {
+  opacity: 0.7;
+}
+
+/* TOGGLE BUTTON */
+.nav-toggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+}
+
+/* HAMBURGER BARS */
+.bar {
+  width: 25px;
+  height: 3px;
+  background-color: var(--text);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* ANIMACIÓN A "X" */
+.nav-toggle.active .bar:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.nav-toggle.active .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle.active .bar:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* MENU MOBILE (DESPLEGABLE) */
+.nav-menu {
+  display: none;
+  gap: 24px;
+}
+
+/* OVERLAY MOBILE */
+.nav-menu.active {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  position: fixed;
+  top: 70px; /* respeta altura del navbar */
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  background-color: rgba(249, 250, 251, 0.98);
+  backdrop-filter: blur(6px);
+
+  gap: 24px;
+
+  opacity: 0;
+transform: translateY(-20px);
+animation: menuSlide 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+
+  z-index: 999;
+}
+
+.nav-menu.active a {
+  animation: linkFadeUp 0.4s ease forwards;
+}
+
+.nav-menu.active a:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.nav-menu.active a:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.nav-menu.active a:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.nav-menu.active a:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+/* ANIMACIÓN */
+@keyframes menuSlide {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+    backdrop-filter: blur(0px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    backdrop-filter: blur(6px);
+  }
+}
+
+@keyframes linkFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* BLOQUEAR SCROLL */
+.no-scroll {
+  overflow: hidden;
+}
+
+/* DESKTOP */
+@media (min-width: 768px) {
+
+  .nav-toggle {
+    display: none; /* oculto en desktop */
+  }
+
+  .nav-menu {
+    display: flex; /* visible solo en desktop */
+    flex-direction: row;
+    position: static;
+  }
+
+  .nav-menu a {
+  opacity: 1;
+  animation: none;
+}
+
+  .logo img {
+  height: 60px;
+  width: auto;
+  display: block;
+}
+
+}
+
+/* HERO BASE */
+.hero {
+  position: relative;
+  background-color: white;
+  padding: 80px 0;
+
+  /* MOBILE + TABLET: background */
+  background-image: url("https://raw.githubusercontent.com/ChapersLab/earlylearning/refs/heads/master/img/banner-right.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+/* CONTENEDOR */
+.hero-container {
+  display: flex;
+  justify-content: center;
+}
+
+/* CARD */
+.hero-content {
+  background: white;
+  border-radius: 16px;
+  padding: 28px 20px;
+  max-width: 500px;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+}
+
+/* MOBILE TYPO FIX */
+.hero-content h1 {
+  font-size: 28px;
+  margin-bottom: 14px;
+  max-width: 20ch;
+}
+
+.hero-content p {
+  font-size: 14px;
+  margin-bottom: 18px;
+  color: #4b5563;
+}
+
+.highlight {
+  color: var(--primary);
+}
+
+/* BOTONES */
+.hero-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.btn {
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  width: fit-content;
+}
+
+.btn-primary {
+  background-color: var(--secondary);
+  color: white;
+}
+
+.btn-secondary {
+  background-color: white;
+  border: 1px solid #d1d5db;
+  color: var(--primary);
+}
+
+/* IMAGEN OCULTA MOBILE/TABLET */
+.hero-image {
+  display: none;
+}
+
+/* TABLET (NO TOCAR DISEÑO, SOLO AJUSTES SUAVES) */
+@media (min-width: 768px) {
+
+  .hero {
+    padding: 100px 0;
+    background-position: right center;
+  }
+
+  .hero-content {
+    padding: 36px;
+  }
+
+  .hero-buttons {
+    flex-direction: row;
+  }
+
+}
+
+/* DESKTOP */
+@media (min-width: 1024px) {
+
+  .hero {
+    background-image: none; /* quitamos fondo */
+    padding: 120px 0;
+  }
+
+  .hero-container {
+    justify-content: flex-start;
+  }
+
+  /* TEXTO */
+  .hero-content {
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+    text-align: left;
+    max-width: 550px;
+  }
+
+  .hero-content h1 {
+    font-size: 48px;
+  }
+
+  .hero-content p {
+    font-size: 16px;
+  }
+
+  .hero-buttons {
+    justify-content: flex-start;
+  }
+
+  /* IMAGEN EDGE-TO-RIGHT (CLAVE) */
+  .hero-image {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    width: 50%;
+    max-width: 700px;
+  }
+
+  .hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+}
+
+/* BENEFITS SECTION */
+.benefits {
+  padding: 60px 0;
+  background-color: white;
+}
+
+/* TÍTULO */
+.section-title {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* GRID */
+.benefits-grid {
+  display: grid;
+  gap: 20px;
+}
+
+/* CARD */
+.benefit-card {
+  background-color: #f9fafb;
+  padding: 24px;
+  border-radius: 12px;
+  text-align: center;
+
+  border: 1px solid #e5e7eb;
+
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* ICONO */
+.benefit-icon {
+  font-size: 36px;
+  margin-bottom: 12px;
+}
+
+/* HOVER GENERAL */
+.benefit-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+}
+
+/* FEATURED CARD */
+.benefit-card.featured {
+  position: relative;
+  background-color: #ffffff;
+  border: 2px solid var(--primary);
+  box-shadow: 0 15px 35px rgba(95, 29, 209, 0.15);
+}
+
+/* BADGE */
+.benefit-badge {
+  display: inline-block;
+  margin-bottom: 10px;
+
+  background-color: var(--primary);
+  color: white;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+/* HOVER SOLO FEATURED */
+.benefit-card.featured:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(95, 29, 209, 0.25);
+}
+
+/* TEXTO */
+.benefit-card h3 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.benefit-card p {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* CTA */
+.benefits-cta {
+  margin-top: 40px;
+  text-align: center;
+}
+
+/* TABLET */
+@media (min-width: 768px) {
+  .benefits-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* DESKTOP */
+@media (min-width: 1024px) {
+  .benefits-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+
+
+
+/* HOW IT WORKS */
+.how-it-works {
+  padding: var(--section-space) 0;
+  color: white;
+
+  background: linear-gradient(
+    135deg,
+    var(--primary) 0%,
+    #6d28d9 50%,
+    #4c1d95 100%
+  );
+}
+
+/* TITLES */
+.section-title.light {
+  color: white;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.section-subtitle {
+  text-align: center;
+  margin-bottom: 10px;
+  color: rgba(255,255,255,0.85);
+  font-size: 14px;
+}
+
+/* STEPS */
+.steps {
+  display: grid;
+  gap: 40px;
+  margin-top: 40px;
+  position: relative;
+}
+
+/* STEP */
+.step {
+  text-align: center;
+  max-width: 280px;
+  margin: 0 auto;
+
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease;
+}
+
+/* SHOW ANIMATION */
+.step.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ICON WRAPPER (glass effect) */
+.step-icon-wrapper {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 18px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(8px);
+
+  border: 1px solid rgba(255,255,255,0.15);
+
+  position: relative;
+}
+
+/* NUMBER */
+/* NUMBER — now a small corner badge over the SVG icon rather than the
+   wrapper's only content, since each step has its own tutoring-specific
+   icon (calendar, lesson notes, progress line). */
+.step-number {
+  width: 26px;
+  height: 26px;
+
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+
+  border-radius: 50%;
+  background: white;
+  color: var(--primary);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+}
+
+.step-icon {
+  width: 30px;
+  height: 30px;
+  color: white;
+}
+
+/* GLOW EFFECT */
+.step-icon-wrapper::after {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+
+  background: radial-gradient(
+    rgba(255,255,255,0.15),
+    transparent 70%
+  );
+
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+/* HOVER */
+.step:hover .step-icon-wrapper::after {
+  opacity: 1;
+}
+
+/* TEXT */
+.step h3 {
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.step p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.85);
+}
+
+/* CTA */
+.how-cta {
+  margin-top: 50px;
+  text-align: center;
+}
+
+/* TABLET & DESKTOP */
+@media (min-width: 768px) {
+  .steps {
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+  }
+
+  /* LINE ANIMATED */
+  .steps::before {
+    content: "";
+    position: absolute;
+    top: 35px;
+    left: 10%;
+    right: 10%;
+    height: 2px;
+
+    background: linear-gradient(
+      to right,
+      rgba(255,255,255,0.2),
+      white,
+      rgba(255,255,255,0.2)
+    );
+
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.8s ease;
+  }
+
+  .steps.show-line::before {
+    transform: scaleX(1);
+  }
+
+  .step {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+/* PULSE ANIMATION */
+@keyframes stepPulse {
+  0% { transform: scale(0.9); opacity: 0; }
+  60% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+.step.show .step-icon-wrapper {
+  animation: stepPulse 0.5s ease forwards;
+}
+/* ==========================================================================
+   SHARED — eyebrow label + small tag/mono-style text.
+   Still Poppins throughout (no new font introduced) — the "label" feel
+   comes from weight, tracking and uppercase, not a monospace typeface.
+   ========================================================================== */
+.eyebrow {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+.eyebrow.light { color: rgba(255,255,255,0.85); }
+
+.mono {
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+/* ==========================================================================
+   SECTION 1 — "No todos los estudiantes se traban por lo mismo."
+   An interactive student-situation widget: a vertical tab list on the
+   left, a content panel on the right that swaps a small academic-
+   workspace graphic per situation. Genuinely different composition and
+   interaction from the previous static numbered-row list — not a
+   restyle of it.
+   ========================================================================== */
+.situations {
+  padding: var(--section-space) 0;
+  background-color: white;
+}
+.problems-intro { max-width: 640px; margin-bottom: 48px; }
+.problems-intro .section-title { text-align: left; margin-bottom: 14px; }
+.problems-lead { color: var(--ink-muted); font-size: 16px; max-width: 52ch; }
+
+.situation-widget {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--paper-tint);
+}
+
+/* ---------- Tabs ---------- */
+.situation-tablist {
+  display: flex;
+  flex-direction: column;
+}
+.situation-tab {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  text-align: left;
+  width: 100%;
+  padding: 20px;
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  cursor: pointer;
+}
+.situation-tab-number {
+  color: var(--purple-100);
+  font-size: 13px;
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+.situation-tab-title {
+  display: block;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.situation-tab-desc {
+  display: block;
+  font-size: 13px;
+  color: var(--ink-muted);
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 280ms ease, opacity 220ms ease, margin-top 280ms ease;
+}
+.situation-tab.is-active {
+  background: white;
+}
+.situation-tab.is-active .situation-tab-number { color: var(--primary); }
+.situation-tab.is-active .situation-tab-desc {
+  max-height: 60px;
+  opacity: 1;
+  margin-top: 2px;
+}
+.situation-tab:hover .situation-tab-title { color: var(--primary); }
+.situation-tab:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: -2px;
+}
+
+/* ---------- Panels ---------- */
+.situation-panels { position: relative; padding: 28px 20px; min-height: 260px; }
+.situation-panel { display: none; }
+.situation-panel.is-active {
+  display: block;
+  animation: situationFadeIn 320ms ease;
+}
+@keyframes situationFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.situation-panel:focus-visible { outline: none; }
+
+.situation-visual {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 22px;
+  min-height: 210px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Panel 1 — confusion -> understanding worksheet fragment */
+.worksheet-card { display: flex; flex-direction: column; gap: 14px; }
+.worksheet-line {
+  font-size: 14px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+}
+.worksheet-line--wrong {
+  color: #9CA3AF;
+  text-decoration: line-through;
+  text-decoration-color: #FCA5A5;
+  background: #F9FAFB;
+}
+.worksheet-line--right {
+  color: var(--text);
+  background: var(--green-50);
+  font-weight: 600;
+}
+.worksheet-check { width: 16px; height: 16px; color: #16A34A; flex-shrink: 0; }
+.worksheet-annotation {
+  font-style: italic;
+  font-size: 13px;
+  color: var(--primary);
+  align-self: flex-start;
+  position: relative;
+  padding-left: 18px;
+}
+.worksheet-annotation::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 12px;
+  height: 8px;
+  border-left: 1.5px solid var(--primary);
+  border-bottom: 1.5px solid var(--primary);
+  transform: translateY(-70%) rotate(-45deg);
+}
+
+/* Panel 2 — exam calendar + checklist */
+.situation-visual--exam { flex-direction: row; gap: 24px; align-items: center; flex-wrap: wrap; }
+.mini-calendar { flex: 0 0 auto; }
+.mini-calendar-head { color: var(--primary); margin-bottom: 8px; font-size: 11px; }
+.mini-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 18px);
+  gap: 4px;
+}
+.mini-calendar-grid span {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  background: var(--bg);
+}
+.mini-calendar-grid span.is-exam {
+  background: var(--primary);
+  color: white;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+.mini-checklist { list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 14px; }
+.mini-checklist li { position: relative; padding-left: 24px; color: var(--ink-muted); }
+.mini-checklist li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 3px;
+  width: 15px; height: 15px;
+  border-radius: 4px;
+  border: 1.5px solid var(--line);
+}
+.mini-checklist li.is-checked { color: var(--text); }
+.mini-checklist li.is-checked::before {
+  background: var(--secondary);
+  border-color: var(--secondary);
+}
+.mini-checklist li.is-checked::after {
+  content: "";
+  position: absolute;
+  left: 4px; top: 6px;
+  width: 7px; height: 4px;
+  border-left: 1.5px solid white;
+  border-bottom: 1.5px solid white;
+  transform: rotate(-45deg);
+}
+
+/* Panel 3 — progress graph */
+.progress-graph { width: 100%; height: 90px; }
+.progress-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+.progress-tags span {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--ink-muted);
+}
+.progress-tags span.is-current {
+  background: var(--green-50);
+  color: #16A34A;
+  font-weight: 600;
+}
+
+@media (min-width: 768px) {
+  .situation-widget { flex-direction: row; }
+  .situation-tablist { flex: 0 0 320px; border-right: 1px solid var(--line); }
+  .situation-panels { flex: 1; padding: 32px; }
+}
+@media (min-width: 1024px) {
+  .problems-intro { display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; max-width: none; }
+  .problems-intro .section-title { max-width: 20ch; }
+  .problems-lead { margin-bottom: 4px; }
+  .situation-tablist { flex: 0 0 360px; }
+  .situation-tab { padding: 24px 28px; }
+  .situation-panels { padding: 40px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .situation-panel.is-active { animation: none; }
+}
+
+
+   SECTION 3 — MATERIAS
+   Three subjects, each with its own small graphic language (a coordinate
+   line for Matemáticas, a quotation fragment for Inglés, a force-vector
+   diagram for Física) instead of one repeated icon-card pattern. Panel
+   tint alternates through the existing palette (purple tint / paper /
+   green tint) so the row reads as three distinct subjects, not three
+   copies of the same card.
+   ========================================================================== */
+.subjects {
+  padding: var(--section-space) 0;
+  background-color: var(--bg);
+}
+.subjects-intro { max-width: 640px; margin-bottom: 40px; }
+.subjects-intro .section-title { text-align: left; margin-bottom: 14px; }
+
+.subject-grid {
+  list-style: none;
+  display: grid;
+  gap: 20px;
+}
+.subject-card {
+  border-radius: 16px;
+  padding: 28px 24px;
+  border: 1px solid var(--line);
+  background: white;
+}
+.subject-card--math { background: var(--purple-50); border-color: var(--purple-100); }
+.subject-card--english { background: white; }
+.subject-card--physics { background: var(--green-50); border-color: #CDF2DE; }
+
+.subject-graphic {
+  position: relative;
+  height: 100px;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: flex-end;
+}
+.subject-card--math .subject-graphic svg,
+.subject-card--physics .subject-graphic svg {
+  width: 100%;
+  height: 100%;
+  color: var(--primary);
+}
+.subject-card--physics .subject-graphic svg { color: #16A34A; }
+.subject-formula {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 13px;
+  color: var(--ink-muted);
+  background: rgba(255,255,255,0.7);
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+.subject-quote {
+  font-size: 64px;
+  line-height: 1;
+  color: var(--purple-100);
+  font-weight: 700;
+  position: absolute;
+  top: -8px;
+  left: -4px;
+}
+.subject-phrase {
+  font-style: italic;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--primary);
+  line-height: 1.3;
+  position: relative;
+  z-index: 1;
+}
+
+.subject-card h3 {
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+.subject-topics {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.subject-topics li {
+  font-size: 13px;
+  color: var(--text);
+  background: rgba(255,255,255,0.7);
+  border: 1px solid var(--line);
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+.subject-card--math .subject-topics li,
+.subject-card--physics .subject-topics li { background: rgba(255,255,255,0.55); }
+
+@media (min-width: 768px) {
+  .subject-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 1024px) {
+  .subjects-intro { display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; max-width: none; }
+  .subjects-intro .problems-lead { max-width: 42ch; margin-bottom: 4px; }
+  .subject-card { padding: 32px 28px; }
+}
+
+/* ---------- Materias entrance animations ----------
+   Progressive enhancement: every graphic element is fully visible by
+   default (a correct, complete graphic with no JS at all). Only once
+   main.js confirms it can run the reveal does it add .js-animate to the
+   section — which is what actually hides these elements pre-animation.
+   If JavaScript fails or is disabled, the artwork is simply static and
+   complete rather than missing anything.
+
+   Each subject now animates as a genuine multi-stage sequence — not just
+   the text/card fading in — so the graphic itself visibly participates:
+
+   Matemáticas: axes draw -> graph line draws -> data point appears
+   Inglés:      underline draws -> quotation mark scales in -> lines rise
+   Física:      origin point appears -> each vector shaft draws ->
+                its own arrowhead appears right behind it
+   ========================================================================== */
+.subject-axis,
+.subject-line { stroke-dashoffset: 0; }
+.subject-line-dot { opacity: 1; transform: scale(1); transform-origin: center; }
+.subject-arrowhead { opacity: 1; transform: scale(1); transform-origin: center; }
+.subject-underline {
+  display: block;
+  position: absolute;
+  top: 62px;
+  left: 2px;
+  width: 32px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--purple-100);
+}
+.subject-quote { display: inline-block; }
+.phrase-line { display: inline-block; opacity: 1; transform: none; }
+
+/* ---- Matemáticas: axes -> line -> point ---- */
+.subjects.js-animate .subject-axis {
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  transition: stroke-dashoffset 320ms ease;
+}
+.subjects.js-animate .subject-line--graph {
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  transition: stroke-dashoffset 750ms ease 300ms;
+}
+.subjects.js-animate .subject-card--math .subject-line-dot {
+  opacity: 0;
+  transform: scale(0);
+  transition: opacity 220ms ease 1050ms, transform 220ms ease 1050ms;
+}
+.subjects.js-animate .subject-card--math.is-visible .subject-axis,
+.subjects.js-animate .subject-card--math.is-visible .subject-line--graph { stroke-dashoffset: 0; }
+.subjects.js-animate .subject-card--math.is-visible .subject-line-dot { opacity: 1; transform: scale(1); }
+
+/* ---- Inglés: underline -> quote -> lines ---- */
+.subjects.js-animate .subject-underline {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 350ms ease;
+}
+.subjects.js-animate .subject-quote {
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 300ms ease 300ms, transform 300ms ease 300ms;
+}
+.subjects.js-animate .phrase-line {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 400ms ease, transform 400ms ease;
+}
+.subjects.js-animate .subject-card--english.is-visible .subject-underline { transform: scaleX(1); }
+.subjects.js-animate .subject-card--english.is-visible .subject-quote { opacity: 1; transform: scale(1); }
+.subjects.js-animate .subject-card--english.is-visible .phrase-line:nth-child(1) { transition-delay: 620ms; }
+.subjects.js-animate .subject-card--english.is-visible .phrase-line:nth-child(3) { transition-delay: 780ms; }
+.subjects.js-animate .subject-card--english.is-visible .phrase-line:nth-child(5) { transition-delay: 940ms; }
+.subjects.js-animate .subject-card--english.is-visible .phrase-line { opacity: 1; transform: translateY(0); }
+
+/* ---- Física: origin point -> each shaft draws -> its arrowhead appears ---- */
+.subjects.js-animate .subject-card--physics .subject-line-dot {
+  opacity: 0;
+  transform: scale(0);
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+.subjects.js-animate .subject-line--delay1 {
+  stroke-dasharray: 140;
+  stroke-dashoffset: 140;
+  transition: stroke-dashoffset 550ms ease 180ms;
+}
+.subjects.js-animate .subject-line--delay2 {
+  stroke-dasharray: 140;
+  stroke-dashoffset: 140;
+  transition: stroke-dashoffset 550ms ease 320ms;
+}
+.subjects.js-animate .subject-arrowhead--1 {
+  opacity: 0;
+  transform: scale(0.4);
+  transition: opacity 180ms ease 730ms, transform 180ms ease 730ms;
+}
+.subjects.js-animate .subject-arrowhead--2 {
+  opacity: 0;
+  transform: scale(0.4);
+  transition: opacity 180ms ease 870ms, transform 180ms ease 870ms;
+}
+.subjects.js-animate .subject-card--physics.is-visible .subject-line-dot { opacity: 1; transform: scale(1); }
+.subjects.js-animate .subject-card--physics.is-visible .subject-line--delay1,
+.subjects.js-animate .subject-card--physics.is-visible .subject-line--delay2 { stroke-dashoffset: 0; }
+.subjects.js-animate .subject-card--physics.is-visible .subject-arrowhead--1,
+.subjects.js-animate .subject-card--physics.is-visible .subject-arrowhead--2 { opacity: 1; transform: scale(1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .subjects.js-animate .subject-axis,
+  .subjects.js-animate .subject-line,
+  .subjects.js-animate .subject-underline { transition: none; stroke-dashoffset: 0; transform: none; }
+  .subjects.js-animate .subject-line-dot,
+  .subjects.js-animate .subject-arrowhead,
+  .subjects.js-animate .subject-quote { transition: none; opacity: 1; transform: scale(1); }
+  .subjects.js-animate .phrase-line { transition: none; opacity: 1; transform: none; }
+}
+
+/* ==========================================================================
+   SECTION 4 — TUTORES
+   Large editorial profiles rather than small circular headshots. No real
+   photos/credentials exist yet — the portrait area is a clearly labeled
+   placeholder (a simple person outline + "Foto próximamente"), built so a
+   real photo can drop in later without restructuring anything.
+   ========================================================================== */
+.tutors {
+  padding: var(--section-space) 0;
+  background-color: white;
+}
+.tutors-intro { max-width: 640px; margin-bottom: 48px; }
+.tutors-intro .section-title { text-align: left; margin-bottom: 14px; }
+
+.tutor-list { list-style: none; display: flex; flex-direction: column; gap: 32px; }
+
+.tutor-profile {
+  display: grid;
+  gap: 24px;
+  border-radius: 20px;
+  background: var(--paper-tint);
+  padding: 24px;
+}
+.tutor-portrait {
+  position: relative;
+  min-height: 280px;
+  border-radius: 14px;
+  background: var(--purple-100);
+  overflow: hidden;
+  /* A quiet dot-grid behind the contained photo, so any letterboxed
+     space around it (from object-fit: contain preserving the real
+     photo) reads as an intentional academic-panel background rather
+     than empty space. */
+  background-image: radial-gradient(rgba(95, 29, 209, 0.18) 1.5px, transparent 1.5px);
+  background-size: 16px 16px;
+}
+.tutor-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+  display: block;
+  position: relative;
+}
+
+@media (min-width: 700px) { .tutor-portrait { min-height: 340px; } }
+@media (min-width: 1024px) { .tutor-portrait { min-height: 420px; } }
+
+.tutor-info { display: flex; flex-direction: column; }
+.tutor-index { color: var(--primary); margin-bottom: 8px; }
+.tutor-info h3 { font-size: 22px; margin-bottom: 10px; }
+.tutor-info p { color: var(--ink-muted); margin-bottom: 16px; }
+
+.tutor-tags { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+.tutor-tags li {
+  font-size: 13px;
+  background: white;
+  border: 1px solid var(--line);
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+
+.tutor-cta {
+  font-weight: 600;
+  color: var(--primary);
+  align-self: flex-start;
+}
+.tutor-cta span { transition: transform 0.25s ease; display: inline-block; }
+.tutor-cta:hover span { transform: translateX(4px); }
+.tutor-cta:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; border-radius: 2px; }
+
+@media (min-width: 768px) {
+  .tutor-profile { grid-template-columns: 1fr 1fr; align-items: center; padding: 32px; }
+  .tutor-profile--reverse .tutor-portrait { order: 2; }
+}
+@media (min-width: 1024px) {
+  .tutor-profile { grid-template-columns: 44% 1fr; gap: 48px; padding: 40px; }
+  .tutor-info { max-width: 460px; }
+}
+
+/* ==========================================================================
+   SECTION 5 — TESTIMONIOS
+   One larger primary quote + two smaller supporting ones, not three
+   identical star-rated cards. No fake ratings. Every quote here is sample
+   content, explicitly labeled "Ejemplo" until real testimonials exist.
+   ========================================================================== */
+.testimonials {
+  padding: var(--section-space) 0;
+  background-color: var(--bg);
+}
+.testimonials .section-title { text-align: left; margin-bottom: 40px; max-width: 30ch; }
+
+.testimonial-grid {
+  display: grid;
+  gap: 20px;
+}
+.testimonial {
+  position: relative;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 28px 24px;
+}
+.testimonial-sample {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  color: var(--ink-muted);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 10px;
+}
+.testimonial-mark {
+  font-size: 40px;
+  color: var(--purple-100);
+  font-weight: 700;
+  line-height: 1;
+  display: block;
+  margin-bottom: 8px;
+}
+.testimonial blockquote {
+  font-size: 16px;
+  line-height: 1.55;
+  margin-bottom: 16px;
+  max-width: 60ch;
+}
+.testimonial-role { color: var(--primary); }
+
+.testimonial--primary {
+  background: var(--purple-50);
+  border-color: var(--purple-100);
+}
+.testimonial--primary blockquote { font-size: 20px; }
+
+@media (min-width: 768px) {
+  .testimonial-grid { grid-template-columns: repeat(2, 1fr); }
+  .testimonial--primary { grid-column: 1 / -1; }
+}
+@media (min-width: 1024px) {
+  .testimonial-grid { grid-template-columns: 1.4fr 1fr; grid-template-rows: repeat(2, 1fr); }
+  .testimonial--primary { grid-column: 1; grid-row: 1 / 3; display: flex; flex-direction: column; justify-content: center; }
+  .testimonial--primary blockquote { font-size: 24px; }
+}
+
+/* ==========================================================================
+   SECTION 6 — CONTACTO
+   Split layout: conversion message on one side, a short compact form on
+   the other. No backend exists yet — see main.js for the clearly marked
+   placeholder submit handler and the WhatsApp-number configuration note.
+   ========================================================================== */
+.contact {
+  padding: var(--section-space) 0;
+  background-color: white;
+}
+.contact-inner {
+  display: grid;
+  gap: 36px;
+}
+.contact-message .section-title { text-align: left; margin-bottom: 14px; }
+.contact-note {
+  margin-top: 18px;
+  font-size: 14px;
+  color: var(--ink-muted);
+  padding-left: 14px;
+  border-left: 2px solid var(--secondary);
+}
+
+.contact-form {
+  background: var(--paper-tint);
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.form-row { display: flex; flex-direction: column; gap: 6px; }
+.form-row--split { display: grid; grid-template-columns: 1fr; gap: 16px; }
+.form-optional { color: var(--ink-muted); font-weight: 400; text-transform: none; letter-spacing: 0; }
+
+.contact-form label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  font-family: inherit;
+  font-size: 15px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: white;
+  color: var(--text);
+}
+.contact-form input:focus-visible,
+.contact-form select:focus-visible,
+.contact-form textarea:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 1px;
+}
+.contact-form textarea { resize: vertical; min-height: 80px; }
+
+.form-submit { align-self: flex-start; margin-top: 4px; }
+.form-status {
+  font-size: 13px;
+  color: var(--primary);
+  background: var(--purple-50);
+  padding: 10px 12px;
+  border-radius: 8px;
+}
+
+@media (min-width: 700px) {
+  .form-row--split { grid-template-columns: 1fr 1fr; }
+}
+@media (min-width: 1024px) {
+  .contact-inner { grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+  .contact-message { max-width: 440px; }
+  .contact-form { padding: 32px; }
+}
+
+/* ==========================================================================
+   SECTION 7 — FOOTER
+   Compact — brand, two nav columns, legal line. No invented contact
+   details, social accounts or addresses.
+   ========================================================================== */
+.site-footer {
+  background: var(--text);
+  color: rgba(255,255,255,0.8);
+  padding: 48px 0 0;
+}
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+.footer-brand { max-width: 320px; }
+.footer-logo { height: 36px; width: auto; filter: brightness(0) invert(1); margin-bottom: 12px; }
+.footer-brand p { font-size: 14px; color: rgba(255,255,255,0.6); }
+
+.footer-nav { display: flex; gap: 48px; flex-wrap: wrap; }
+.footer-nav-col { display: flex; flex-direction: column; gap: 10px; }
+.footer-heading { color: rgba(255,255,255,0.45); margin-bottom: 4px; }
+.footer-nav-col a { font-size: 14px; color: rgba(255,255,255,0.8); transition: color 0.2s ease; }
+.footer-nav-col a:hover { color: white; }
+.footer-nav-col a:focus-visible { outline: 1px solid white; outline-offset: 2px; }
+
+.footer-bottom { padding: 20px 0; font-size: 13px; color: rgba(255,255,255,0.45); }
+
+@media (min-width: 768px) {
+  .footer-inner { flex-direction: row; justify-content: space-between; }
+}
+
+/* ==========================================================================
+   REDUCED MOTION
+   The existing animations (mobile menu slide, step reveal, icon pulse)
+   had no reduced-motion handling at all. This is purely additive — it
+   respects the user's system preference without changing any layout,
+   color or spacing decision anywhere on the page, including the locked
+   Navbar/Hero.
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .step, .nav-menu.active, .nav-menu.active a {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
